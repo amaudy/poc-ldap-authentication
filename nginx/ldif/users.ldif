@@ -1,0 +1,12 @@
+dn: uid=testuser,ou=Users,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: testuser
+cn: Test User
+sn: User
+userPassword: testpass
+loginShell: /bin/bash
+uidNumber: 2000
+gidNumber: 2000
+homeDirectory: /home/testuser 
