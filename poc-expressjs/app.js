@@ -5,6 +5,13 @@ const PORT = 3000;
 // Add CORS and JSON middleware
 app.use(express.json());
 
+// Add logging middleware
+app.use((req, res, next) => {
+  console.log('Headers:', req.headers);
+  console.log('URL:', req.url);
+  next();
+});
+
 // Define protected routes
 app.get('/', (req, res) => {
   // Get username from X-User header (set by nginx after successful auth)
