@@ -26,19 +26,32 @@ Add the following entry to your hosts file (`/etc/hosts`):
 127.0.0.1 internal.example.com
 ```
 
+run docker compose up
 
-# Test LDAP connection
-docker exec openldap ldapsearch -x -H ldap://localhost:389 -D "cn=admin,dc=example,dc=com" -w admin123 -b "dc=example,dc=com"
-
-# Should show the users and groups we created
+```
+docker compose up
 ```
 
+# Test LDAP connection
+
+```
+docker exec openldap ldapsearch -x -H ldap://localhost:389 -D "cn=admin,dc=example,dc=com" -w admin123 -b "dc=example,dc=com"
+```
 
 # Test without credentials (should get 401)
+
+```bash
 curl -i http://internal.example.com
+```
 
 # Test with correct credentials (should get 200)
+
+```bash
 curl -i --user testuser:testpass http://internal.example.com
+```
 
 # Test with wrong credentials (should get 401)
+
+```bash
 curl -i --user wronguser:wrongpass http://internal.example.com
+```
