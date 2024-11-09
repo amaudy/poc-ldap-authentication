@@ -33,6 +33,22 @@ services:
     networks:
       - ldap_network
 
+  loadbalancer:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: loadbalancer
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/usr/local/openresty/nginx/html
+      - ./nginx/lua:/usr/local/openresty/nginx/lua
+    depends_on:
+      - openldap
+    networks:
+      - ldap_network
+
 volumes:
   ldap_data:
   ldap_config:
