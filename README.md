@@ -63,3 +63,14 @@ curl -i --user testuser:testpass http://internal.example.com
 ```bash
 curl -i --user wronguser:wrongpass http://internal.example.com
 ```
+
+
+# Test ExpressJS
+
+```bash
+# Test the API endpoint with correct credentials
+curl -i --user testuser:testpass http://internal.example.com/api/
+
+# Test with wrong credentials
+curl -i --user wronguser:wrongpass http://internal.example.com/api/
+```
