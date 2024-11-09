@@ -1,3 +1,2 @@
 FROM openresty/openresty:alpine
-
-WORKDIR /usr/local/openresty/nginx
+COPY . /usr/local/openresty/nginx/
