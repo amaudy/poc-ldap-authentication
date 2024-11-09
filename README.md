@@ -8,6 +8,14 @@ This project demonstrates LDAP authentication using OpenResty as a reverse proxy
 - phpLDAPadmin (Web UI for LDAP management)
 - OpenResty (Nginx with Lua support for authentication)
 
+## Architecture Diagram
+
+![Architecture Diagram](./docs/archritecture.png)
+
+## Sequence Diagram
+
+![Sequence Diagram](./docs/sequence-diagram.png)
+
 ## Default Credentials
 
 ### LDAP Admin
