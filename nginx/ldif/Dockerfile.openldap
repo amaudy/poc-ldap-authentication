@@ -1,0 +1,9 @@
+FROM osixia/openldap:1.5.0
+
+COPY import.sh /container/service/slapd/assets/config/bootstrap/import.sh
+COPY startup.sh /startup.sh
+
+RUN chmod +x /container/service/slapd/assets/config/bootstrap/import.sh && \
+    chmod +x /startup.sh
+
+ENTRYPOINT ["/startup.sh"]

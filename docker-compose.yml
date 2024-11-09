@@ -2,21 +2,29 @@ version: '3.8'
 
 services:
   openldap:
-    image: osixia/openldap:1.5.0
+    build:
+      context: ./nginx/ldif
+      dockerfile: Dockerfile.openldap
     container_name: openldap
     environment:
       LDAP_ORGANISATION: "Dev Company"
       LDAP_DOMAIN: "example.com"
       LDAP_BASE_DN: "dc=example,dc=com"
-      LDAP_ADMIN_PASSWORD: "admin123"  # Change this in production
-      LDAP_CONFIG_PASSWORD: "config123"  # Change this in production
-      LDAP_TLS: "false"  # For development only
+      LDAP_ADMIN_PASSWORD: "admin123"
+      LDAP_CONFIG_PASSWORD: "config123"
+      LDAP_TLS: "false"
     ports:
       - "389:389"
       - "636:636"
     volumes:
       - ldap_data:/var/lib/ldap
       - ldap_config:/etc/ldap/slapd.d
+      - ./nginx/ldif:/ldif:ro
+    healthcheck:
+      test: ["CMD", "ldapsearch", "-x", "-H", "ldap://localhost:389", "-D", "cn=admin,dc=example,dc=com", "-w", "admin123", "-b", "dc=example,dc=com"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     networks:
       - ldap_network
 

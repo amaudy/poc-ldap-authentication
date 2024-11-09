@@ -46,8 +46,8 @@ if not ok then
     ngx.exit(500)
 end
 
--- Create user DN
-local user_dn = "cn=" .. username .. "," .. ldap_base_dn
+-- Create user DN with updated path
+local user_dn = "uid=" .. username .. ",ou=Users," .. ldap_base_dn
 
 -- Send bind request
 local bind_request = create_bind_request(user_dn, password)
