@@ -50,6 +50,16 @@ services:
     depends_on:
       - openldap
 
+  express:
+    build:
+      context: ./poc-expressjs
+      dockerfile: Dockerfile
+    container_name: express
+    networks:
+      - ldap_network
+    depends_on:
+      - auth
+
   loadbalancer:
     build:
       context: ./nginx
@@ -62,6 +72,7 @@ services:
       - ./nginx/html:/usr/local/openresty/nginx/html
     depends_on:
       - auth
+      - express
     networks:
       - ldap_network
 
